@@ -83,3 +83,9 @@ Producer由ProducerFactory这个工厂类构建的，而且所有的Producer都�
 EventBus里有一个HashMap用来存储粘性事件队列，当注册事件时，如果该事件是粘性事件，则从该队列中取出最后一个该类型的事件并发送给订阅者。
 
 ### 天猫七巧板布局、vLayout的实现原理？
+Vlayout是alibaba开源的一个基础ui框架，用于快速实现一些复杂布局，在淘宝和天猫App中都有使用。
+VirtualLayout是一个针对RecyclerView的LayoutManager扩展, 主要提供一整套布局方案和布局间的组件复用的问题。
+通过定制化的LayoutManager，接管整个RecyclerView的布局逻辑；LayoutManager管理了一系列LayoutHelper，LayoutHelper负责具体布局逻辑实现的地方；每一个LayoutHelper负责页面某一个范围内的组件布局；不同的LayoutHelper可以做不同的布局逻辑，因此可以在一个RecyclerView页面里提供异构的布局结构，这就能比系统自带的LinearLayoutManager、GridLayoutManager等提供更加丰富的能力。同时支持扩展LayoutHelper来提供更多的布局能力。
+####  VLayout 使用场景
+类似淘宝这样形式的布局非常适合使用VLayout，并且VLayout提供了多种layoutHelper，使用非常方便。
+但是如果是类似于微博、微信这种Feed流为主的界面，使用VLayout并没有什么优势，徒增实现的复杂度。
