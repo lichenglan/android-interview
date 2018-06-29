@@ -29,7 +29,16 @@ Service生命周期：
 - 同时使用startService()启动服务与bindService()绑定服务：onCreate() -> onStartCommnad() -> onBind() -> onUnBind() -> onDestory
 
 ### Service先start再bind如何关闭service，为什么bindService可以跟Activity生命周期联动？
-
+- 如果先bindService,再startService:
+在bind的Activity退出的时候,Service会执行unBind方法而不执行onDestory方法,因为有startService方法调用过,所以Activity与Service解除绑定后会有一个与调用者没有关连的Service存在
+- 如果先bindService,再startService,再调用Context.stopService
+Service的onDestory方法不会立刻执行,因为有一个与Service绑定的Activity,但是在Activity退出的时候,会执行onDestory,如果要立刻执行stopService,就得先解除绑定
+- 针对startService和bindService：
+a.先startService，则调用onCreate，onStartCommand；当bindService时，再调用onBind（不会再调用onCreate）
+b.先bindServcie，则调用onCreate，onBind；当startService时，再调用onStartCommand
+- 针对stopService和unbindService：
+a.先stopService，则不会调用任何方法，然后当unbindService时，依次调用onUnbind和onDestroy方法
+b.先unbindService，则会调用onUnbind，然后当stopService时，会调用onDestroy
 ### 广播分为哪几种，应用场景是什么？
 
 - 普通广播：调用sendBroadcast()发送，最常用的广播。
