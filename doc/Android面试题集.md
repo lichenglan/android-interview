@@ -142,6 +142,23 @@ View的绘制流程主要分为三步：
 一般说来需要重新布局就调用requestLayout()方法，需要重新绘制就调用invalidate()方法。
 
 ### Scroller用过吗，了解它的原理吗？
+在实际的开发中我们真正地使用scrollTo()和scrollBy()来实现View的滑动的时候并不多。因为这两个方法产生的滑动是不连贯的，跳跃的，闪烁的，最终的效果也不够平滑
+Scroller类封装了滑动操作，常用于实现View的平滑滚动并且可使用插值器(Interpolator)设定先加速后减速，先减速后加速等等滑动效果。
+
+#### 依据以上文档的描述可把Scroller的使用概括为以下五个主要步骤：
+
+ - 初始化Scroller
+
+ - 调用startScroll()开始滚动
+
+ - 执行invalidate()刷新界面
+
+ - 重写View的computeScroll()并在其内部实现与滚动相关的业务逻辑
+
+ - 再次执行invalidate()刷新界面
+
+链接：https://www.jianshu.com/p/f48010c89f8f
+
 
 ### 了解APK的打包流程吗，描述一下？
 
