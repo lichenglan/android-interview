@@ -12,10 +12,11 @@ Android系统架构图
 - Linux内核层
 
 ### Activity如与Service通信？
-
-可以通过bindService的方式，先在Activity里实现一个ServiceConnection接口，并将该接口传递给bindService()方法，在ServiceConnection接口的onServiceConnected()方法
-里执行相关操作。
-
+1.直接通过Intent进行传值，我们在启动一个Service的时候通过Intent的对象向Service进行传值，这种方式传递值比较不方便，性能不是很高。
+2.可以通过bindService的方式，先在Activity里实现一个ServiceConnection接口，并将该接口传递给bindService()方法，在ServiceConnection接口的onServiceConnected()方法里执行相关操作。
+3.通过Broadcast广播
+4.自定义接口回调
+https://blog.csdn.net/qq_28468727/article/details/52144155
 ### Service的生命周期与启动方法由什么区别？
 
 - startService()：开启Service，调用者退出后Service仍然存在。
